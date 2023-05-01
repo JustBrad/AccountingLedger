@@ -1,8 +1,9 @@
 package org.yearup;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class LedgerApp
@@ -61,14 +62,43 @@ public class LedgerApp
         LocalTime time = LocalTime.now();
 
         // Make new transaction w/ these values
-        Transaction transaction = new Transaction(date, time, description, vendor, amount);
+        Transaction t = new Transaction(date, time, description, vendor, amount);
 
-        // Print values
-        System.out.println(transaction.getDate());
-        System.out.println(transaction.getFormattedTime());
-        System.out.println(transaction.getDescription());
-        System.out.println(transaction.getVendor());
-        System.out.println(transaction.getAmount());
+        // Write to file
+        writeTransaction(t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), t.getAmount());
+    }
+
+    // Write transaction to transactions.csv
+    public void writeTransaction(LocalDate date, String time, String description, String vendor, double amount)
+    {
+        String fileName = "transactions.csv";
+        FileWriter writer = null;
+
+        try
+        {
+            // Append to file
+            writer = new FileWriter(fileName, true);
+            writer.write("\n" + date.toString() + "|" + time + "|" + description + "|" + vendor + "|" + String.format("%.2f", amount));
+            System.out.println("\nDeposit added.");
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                if(writer != null)
+                {
+                    writer.close();
+                }
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void run()
