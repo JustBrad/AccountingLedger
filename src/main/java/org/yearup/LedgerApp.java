@@ -150,7 +150,7 @@ public class LedgerApp
             switch (option)
             {
                 case "1":
-                    //month to date
+                    generateMonthToDate();
                     break;
                 case "2":
                     //prev month
@@ -410,6 +410,32 @@ public class LedgerApp
             System.out.printf("%-15s %-15s %-40s %-20s %10s\n", t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), t.getAmount());
             System.out.println("--------------------------------------------------------------------------------------------------------");
         }
+    }
+
+    // Generates report for Month to Date
+    public void generateMonthToDate()
+    {
+        // Get current date & first day of month
+        System.out.print("Enter current date: ");
+        LocalDate currentDate = LocalDate.parse(scanner.nextLine().strip());
+        LocalDate firstDayOfMonth = currentDate.withDayOfMonth(1);
+        double totalAmount = 0.0;
+
+        System.out.println("\n----------MONTH-TO-DATE----------\n");
+        System.out.println("CURRENT DATE: " + currentDate.getMonth() + " " + currentDate.getDayOfMonth() + ", " + currentDate.getYear() + "\n");
+
+        for(Transaction t : transactions)
+        {
+            // If entry is from start of month (including the 1st) to current date
+            if(t.getDate().isAfter(firstDayOfMonth.minusDays(1)) && t.getDate().isBefore(currentDate))
+            {
+                System.out.printf("%-40s %10.2f\n", t.getDescription(), t.getAmount());
+                System.out.println("---------------------------------------------------");
+                totalAmount += t.getAmount();
+            }
+        }
+
+        System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
     }
 
     public void run()
