@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class LedgerApp
@@ -591,7 +592,19 @@ public class LedgerApp
         System.out.print("Enter vendor name: ");
         String vendor = scanner.nextLine().toUpperCase();
 
-        
+        System.out.println("\nDate\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
+        System.out.println("--------------------------------------------------------------------------------------------------------");
+
+        // For every entry in vendorMap, check if vendor matches & print
+        for (Map.Entry<Transaction, String> map : vendorMap.entrySet())
+        {
+            if (map.getValue().equalsIgnoreCase(vendor))
+            {
+                Transaction t = map.getKey();
+                System.out.printf("%-15s %-15s %-40s %-20s %10s\n", t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), t.getAmount());
+                System.out.println("--------------------------------------------------------------------------------------------------------");
+            }
+        }
     }
 
     // Run
