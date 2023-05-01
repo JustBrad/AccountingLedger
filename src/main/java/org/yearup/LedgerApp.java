@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class LedgerApp
 {
+    static String fileName = "transactions.csv";
     static Scanner scanner = new Scanner(System.in);
 
     // Display Home screen
@@ -46,6 +47,7 @@ public class LedgerApp
         }
     }
 
+    // Append a deposit to csv
     public void addDeposit()
     {
         // Prompt user for description, vendor & amount
@@ -68,10 +70,41 @@ public class LedgerApp
         writeTransaction(t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), t.getAmount());
     }
 
+    // Overwrite csv and add first line
+    public void resetCsv()
+    {
+        FileWriter writer = null;
+
+        try
+        {
+            // Append to file
+            writer = new FileWriter(fileName);
+            writer.write("date|time|description|vendor|amount");
+            System.out.println("\n'transactions.csv' has been reset.");
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                if(writer != null)
+                {
+                    writer.close();
+                }
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
     // Write transaction to transactions.csv
     public void writeTransaction(LocalDate date, String time, String description, String vendor, double amount)
     {
-        String fileName = "transactions.csv";
         FileWriter writer = null;
 
         try
@@ -103,6 +136,7 @@ public class LedgerApp
 
     public void run()
     {
+        resetCsv();
         displayHome();
     }
 }
