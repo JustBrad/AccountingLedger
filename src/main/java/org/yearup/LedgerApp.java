@@ -82,7 +82,7 @@ public class LedgerApp
                     break;
                 case "X":
                     System.out.println("\nExiting...");
-                    return;
+                    System.exit(0);
                 default:
                     System.out.println("\nInvalid option.");
                     break;
@@ -153,7 +153,7 @@ public class LedgerApp
                     generateMonthToDate();
                     break;
                 case "2":
-                    //prev month
+                    generatePreviousMonth();
                     break;
                 case "3":
                     //year to date
@@ -412,12 +412,25 @@ public class LedgerApp
         }
     }
 
-    // Generates report for Month to Date
+    // Generates report for Month to Date (Prompted for current date)
     public void generateMonthToDate()
     {
+        LocalDate currentDate;
+
         // Get current date & first day of month
-        System.out.print("Enter current date: ");
-        LocalDate currentDate = LocalDate.parse(scanner.nextLine().strip());
+        while(true)
+        {
+            try
+            {
+                System.out.print("Enter current date: ");
+                currentDate = LocalDate.parse(scanner.nextLine().strip());
+                break;
+            }
+            catch(Exception e)
+            {
+                System.out.println("\nInvalid date.\n");
+            }
+        }
         LocalDate firstDayOfMonth = currentDate.withDayOfMonth(1);
         double totalAmount = 0.0;
 
@@ -428,6 +441,49 @@ public class LedgerApp
         {
             // If entry is from start of month (including the 1st) to current date
             if(t.getDate().isAfter(firstDayOfMonth.minusDays(1)) && t.getDate().isBefore(currentDate))
+            {
+                System.out.printf("%-40s %10.2f\n", t.getDescription(), t.getAmount());
+                System.out.println("---------------------------------------------------");
+                totalAmount += t.getAmount();
+            }
+        }
+
+        System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
+    }
+
+    public void generatePreviousMonth()
+    {
+        LocalDate currentDate;
+
+        // Get current date & first day of month
+        while(true)
+        {
+            try
+            {
+                System.out.print("Enter current date: ");
+                currentDate = LocalDate.parse(scanner.nextLine().strip());
+                break;
+            }
+            catch(Exception e)
+            {
+                System.out.println("\nInvalid date.\n");
+            }
+        }
+        LocalDate firstDayOfMonth = currentDate.withDayOfMonth(1);
+        LocalDate firstDayOfPreviousMonth = firstDayOfMonth.minusMonths(1);
+        double totalAmount = 0.0;
+
+        System.out.println("\n----------PREVIOUS-MONTH----------\n");
+        System.out.println("CURRENT DATE: " + currentDate.getMonth() + " " + currentDate.getDayOfMonth() + ", " + currentDate.getYear() + "\n");
+        System.out.println("PREVIOUS MONTH: " + firstDayOfPreviousMonth.getMonth() + "\n");
+
+        for(Transaction t : transactions)
+        {
+            // Get date of transaction
+            LocalDate transactionDate = t.getDate();
+
+            // If entry is from start of month (including the 1st) to current date
+            if(t.getDate().isAfter(firstDayOfPreviousMonth.minusDays(1)) && t.getDate().isBefore(firstDayOfMonth))
             {
                 System.out.printf("%-40s %10.2f\n", t.getDescription(), t.getAmount());
                 System.out.println("---------------------------------------------------");
