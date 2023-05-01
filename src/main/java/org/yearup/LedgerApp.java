@@ -1,20 +1,57 @@
 package org.yearup;
 
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LedgerApp
 {
     static String fileName = "transactions.csv";
     static Scanner scanner = new Scanner(System.in);
+    static ArrayList<Transaction> transactions = new ArrayList<>();
+    static ArrayList<Transaction> deposits = new ArrayList<>();
+    static ArrayList<Transaction> payments = new ArrayList<>();
 
     // Returns negative value of given number
     public double makeNegative(double num)
     {
         return 0 - num;
+    }
+
+    // Overwrite csv and add first line
+    public void resetCsv()
+    {
+        FileWriter writer = null;
+
+        try
+        {
+            // Append to file
+            writer = new FileWriter(fileName);
+            writer.write("date|time|description|vendor|amount");
+            System.out.println("\n'transactions.csv' has been reset.");
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                if(writer != null)
+                {
+                    writer.close();
+                }
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     // Display Home screen
@@ -72,13 +109,13 @@ public class LedgerApp
             switch (option)
             {
                 case "A":
-                    //All
+                    showAll(transactions);
                     break;
                 case "D":
-                    //Deposits
+                    showAll(deposits);
                     break;
                 case "P":
-                    //Payments
+                    showAll(payments);
                     break;
                 case "R":
                     //Reports
@@ -130,6 +167,10 @@ public class LedgerApp
         // Make new transaction w/ these values
         Transaction t = new Transaction(date, time, description, vendor, amount);
 
+        // Add to respective arraylists
+        transactions.add(t);
+        deposits.add(t);
+
         // Write to file
         writeTransaction(t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), t.getAmount());
     }
@@ -173,40 +214,12 @@ public class LedgerApp
         // Make new transaction w/ these values
         Transaction t = new Transaction(date, time, description, vendor, amount);
 
+        // Add to respective lists
+        transactions.add(t);
+        payments.add(t);
+
         // Write to file
         writeTransaction(t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), t.getAmount());
-    }
-
-    // Overwrite csv and add first line
-    public void resetCsv()
-    {
-        FileWriter writer = null;
-
-        try
-        {
-            // Append to file
-            writer = new FileWriter(fileName);
-            writer.write("date|time|description|vendor|amount");
-            System.out.println("\n'transactions.csv' has been reset.");
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-            try
-            {
-                if(writer != null)
-                {
-                    writer.close();
-                }
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
     }
 
     // Write transaction to transactions.csv
@@ -248,9 +261,88 @@ public class LedgerApp
         }
     }
 
+    // Read file & add entries to variables (ONLY FOR INITIAL RUN)
+    public void readCsv()
+    {
+        FileInputStream fileStream = null;
+        Scanner fileScanner = null;
+
+        try
+        {
+            // Create file stream & scanner
+            fileStream = new FileInputStream(fileName);
+            fileScanner = new Scanner(fileStream);
+
+            // Skip first line (columns)
+            fileScanner.nextLine();
+
+            // Scan through entire csv
+            while(fileScanner.hasNextLine())
+            {
+                String line = fileScanner.nextLine();
+                String[] columns = line.split("\\|");
+
+                LocalDate date = LocalDate.parse(columns[0]);
+                LocalTime time = LocalTime.parse(columns[1]);
+                String description = columns[2];
+                String vendor = columns[3];
+                double amount = Double.parseDouble(columns[4]);
+
+                // Create new transaction obj for each line
+                Transaction t = new Transaction(date, time, description, vendor, amount);
+
+                // Add entries to respective lists
+                transactions.add(t);
+                if(amount > 0)
+                {
+                    deposits.add(t);
+                }
+                else
+                {
+                    payments.add(t);
+                }
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                if(fileStream != null && fileScanner != null)
+                {
+                    fileStream.close();
+                    fileScanner.close();
+                }
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Show all transactions
+    public void showAll(ArrayList<Transaction> list)
+    {
+        if(list == transactions) {System.out.println("\n----------SHOW-ALL----------\n");}
+        else if(list == deposits) {System.out.println("\n----------DEPOSITS----------\n");}
+        else if(list == payments) {System.out.println("\n----------PAYMENTS----------\n");}
+        System.out.println("Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
+        System.out.println("--------------------------------------------------------------------------------------------------------");
+        for(Transaction t : list)
+        {
+            System.out.printf("%-15s %-15s %-40s %-20s %10s\n", t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), t.getAmount());
+            System.out.println("--------------------------------------------------------------------------------------------------------");
+        }
+    }
+
     public void run()
     {
-        resetCsv();
+        // Read csv once to get existing data
+        readCsv();
         displayHome();
     }
 }
