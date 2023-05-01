@@ -156,10 +156,10 @@ public class LedgerApp
                     generatePreviousMonth();
                     break;
                 case "3":
-                    //year to date
+                    generateYearToDate();
                     break;
                 case "4":
-                    //prev year
+                    generatePreviousYear();
                     break;
                 case "5":
                     //search by vendor
@@ -451,6 +451,7 @@ public class LedgerApp
         System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
     }
 
+    // Generates report for Previous Month (Prompted for current date)
     public void generatePreviousMonth()
     {
         LocalDate currentDate;
@@ -479,9 +480,6 @@ public class LedgerApp
 
         for(Transaction t : transactions)
         {
-            // Get date of transaction
-            LocalDate transactionDate = t.getDate();
-
             // If entry is from start of month (including the 1st) to current date
             if(t.getDate().isAfter(firstDayOfPreviousMonth.minusDays(1)) && t.getDate().isBefore(firstDayOfMonth))
             {
@@ -492,6 +490,52 @@ public class LedgerApp
         }
 
         System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
+    }
+
+    // Generates report for Year to Date (Prompted for current date)
+    public void generateYearToDate()
+    {
+        LocalDate currentDate;
+
+        // Get current date & first day of month
+        while(true)
+        {
+            try
+            {
+                System.out.print("Enter current date: ");
+                currentDate = LocalDate.parse(scanner.nextLine().strip());
+                break;
+            }
+            catch(Exception e)
+            {
+                System.out.println("\nInvalid date.\n");
+            }
+        }
+        LocalDate firstDayOfYear = currentDate.withDayOfYear(1);
+        double totalAmount = 0.0;
+
+        System.out.println("\n----------YEAR-TO-DATE----------\n");
+        System.out.println("CURRENT DATE: " + currentDate.getMonth() + " " + currentDate.getDayOfMonth() + ", " + currentDate.getYear() + "\n");
+        System.out.println("YEAR OF: " + currentDate.getYear() + "\n");
+
+        for(Transaction t : transactions)
+        {
+            // If entry is from start of month (including the 1st) to current date
+            if(t.getDate().isEqual(firstDayOfYear) || t.getDate().isAfter(firstDayOfYear))
+            {
+                System.out.printf("%-40s %10.2f\n", t.getDescription(), t.getAmount());
+                System.out.println("---------------------------------------------------");
+                totalAmount += t.getAmount();
+            }
+        }
+
+        System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
+    }
+
+    // Generates report for Previous Year (Prompted for current date)
+    public void generatePreviousYear()
+    {
+        
     }
 
     public void run()
