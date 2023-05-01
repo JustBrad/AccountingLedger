@@ -41,10 +41,49 @@ public class LedgerApp
                     makePayment();
                     break;
                 case "L":
-                    // Display Ledger screen
+                    displayLedger();
                     break;
                 case "X":
                     System.out.println("\nExiting...");
+                    return;
+                default:
+                    System.out.println("\nInvalid option.");
+                    break;
+            }
+        }
+    }
+
+    // Display Ledger screen
+    public void displayLedger()
+    {
+        while (true)
+        {
+            System.out.println("\n----------LEDGER----------\n");
+            System.out.println("What would you like to display?\n");
+            System.out.println("A) All");
+            System.out.println("D) Deposits");
+            System.out.println("P) Payments");
+            System.out.println("R) Reports");
+            System.out.println("H) Home\n");
+
+            System.out.print("Enter an option: ");
+            String option = scanner.nextLine().toUpperCase();
+
+            switch (option)
+            {
+                case "A":
+                    //All
+                    break;
+                case "D":
+                    //Deposits
+                    break;
+                case "P":
+                    //Payments
+                    break;
+                case "R":
+                    //Reports
+                    break;
+                case "H":
                     return;
                 default:
                     System.out.println("\nInvalid option.");
