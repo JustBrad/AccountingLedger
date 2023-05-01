@@ -19,9 +19,9 @@ public class LedgerApp
         System.out.print("Enter an option: ");
         String option = scanner.nextLine().toUpperCase();
 
-        while(true)
+        while (true)
         {
-            switch(option)
+            switch (option)
             {
                 case "D":
                     // Add deposit
