@@ -535,7 +535,42 @@ public class LedgerApp
     // Generates report for Previous Year (Prompted for current date)
     public void generatePreviousYear()
     {
-        
+        LocalDate currentDate;
+
+        // Get current date & first day of month
+        while(true)
+        {
+            try
+            {
+                System.out.print("Enter current date: ");
+                currentDate = LocalDate.parse(scanner.nextLine().strip());
+                break;
+            }
+            catch(Exception e)
+            {
+                System.out.println("\nInvalid date.\n");
+            }
+        }
+        LocalDate firstDayOfYear = currentDate.withDayOfYear(1);
+        LocalDate firstDayOfPreviousYear = firstDayOfYear.minusYears(1);
+        double totalAmount = 0.0;
+
+        System.out.println("\n----------PREVIOUS-YEAR----------\n");
+        System.out.println("CURRENT DATE: " + currentDate.getMonth() + " " + currentDate.getDayOfMonth() + ", " + currentDate.getYear() + "\n");
+        System.out.println("YEAR OF: " + firstDayOfPreviousYear.getYear() + "\n");
+
+        for(Transaction t : transactions)
+        {
+            // If entry is from start of month (including the 1st) to current date
+            if(t.getDate().isAfter(firstDayOfPreviousYear.minusDays(1)) && t.getDate().isBefore(firstDayOfYear))
+            {
+                System.out.printf("%-40s %10.2f\n", t.getDescription(), t.getAmount());
+                System.out.println("---------------------------------------------------");
+                totalAmount += t.getAmount();
+            }
+        }
+
+        System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
     }
 
     public void run()
