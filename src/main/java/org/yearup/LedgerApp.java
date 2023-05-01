@@ -56,8 +56,27 @@ public class LedgerApp
         String description = scanner.nextLine().strip();
         System.out.print("Enter vendor name: ");
         String vendor = scanner.nextLine().strip();
-        System.out.print("Enter amount: $");
-        double amount = Double.parseDouble(scanner.nextLine().strip());
+        double amount;
+
+        while(true)
+        {
+            System.out.print("Enter amount: $");
+            amount = Double.parseDouble(scanner.nextLine().strip());
+
+            // Handle 0 or negative values
+            if(amount > 0)
+            {
+                break;
+            }
+            else if(amount < 0)
+            {
+                System.out.println("\nThe amount cannot be negative.\n");
+            }
+            else
+            {
+                System.out.println("The amount cannot be zero.\n");
+            }
+        }
 
         // Set date & time to current
         LocalDate date = LocalDate.now();
