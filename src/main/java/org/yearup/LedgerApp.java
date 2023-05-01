@@ -31,8 +31,8 @@ public class LedgerApp
         {
             // Append to file
             writer = new FileWriter(fileName);
-            writer.write("date|time|description|vendor|amount");
-            System.out.println("\n'transactions.csv' has been reset.");
+            writer.write("DATE|TIME|DESCRIPTION|VENDOR|AMOUNT");
+            System.out.println("\nThe 'transactions.csv' file has been reset.");
         }
         catch(IOException e)
         {
@@ -181,14 +181,27 @@ public class LedgerApp
     {
         // Prompt user for description, vendor & amount
         System.out.println("\n----------ADD-DEPOSIT----------\n");
-        System.out.print("Enter a date (YYYY-MM-DD): ");
-        LocalDate date = LocalDate.parse(scanner.nextLine());
-        System.out.print("Enter a time (HH:MM:SS): ");
-        LocalTime time = LocalTime.parse(scanner.nextLine());
+        LocalDate date;
+        LocalTime time;
+        while(true)
+        {
+            try
+            {
+                System.out.print("Enter a date (YYYY-MM-DD): ");
+                date = LocalDate.parse(scanner.nextLine().strip());
+                System.out.print("Enter a time (HH:MM:SS): ");
+                time = LocalTime.parse(scanner.nextLine().strip());
+                break;
+            }
+            catch(Exception e)
+            {
+                System.out.println("\nInvalid date/time.\n");
+            }
+        }
         System.out.print("Enter a description: ");
-        String description = scanner.nextLine().strip();
+        String description = scanner.nextLine().strip().toUpperCase();
         System.out.print("Enter vendor name: ");
-        String vendor = scanner.nextLine().strip();
+        String vendor = scanner.nextLine().strip().toUpperCase();
         double amount;
 
         while(true)
@@ -227,14 +240,27 @@ public class LedgerApp
     {
         // Prompt user for description, vendor & amount
         System.out.println("\n----------MAKE-PAYMENT----------\n");
-        System.out.print("Enter a date (YYYY-MM-DD): ");
-        LocalDate date = LocalDate.parse(scanner.nextLine());
-        System.out.print("Enter a time (HH:MM:SS): ");
-        LocalTime time = LocalTime.parse(scanner.nextLine());
+        LocalDate date;
+        LocalTime time;
+        while(true)
+        {
+            try
+            {
+                System.out.print("Enter a date (YYYY-MM-DD): ");
+                date = LocalDate.parse(scanner.nextLine().strip());
+                System.out.print("Enter a time (HH:MM:SS): ");
+                time = LocalTime.parse(scanner.nextLine().strip());
+                break;
+            }
+            catch(Exception e)
+            {
+                System.out.println("\nInvalid date/time.\n");
+            }
+        }
         System.out.print("Enter a description: ");
-        String description = scanner.nextLine().strip();
+        String description = scanner.nextLine().strip().toUpperCase();
         System.out.print("Enter vendor name: ");
-        String vendor = scanner.nextLine().strip();
+        String vendor = scanner.nextLine().strip().toUpperCase();
         double amount;
 
         while(true)
@@ -326,7 +352,7 @@ public class LedgerApp
             // Scan through entire csv
             while(fileScanner.hasNextLine())
             {
-                String line = fileScanner.nextLine();
+                String line = fileScanner.nextLine().toUpperCase();
                 String[] columns = line.split("\\|");
 
                 LocalDate date = LocalDate.parse(columns[0]);
