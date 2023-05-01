@@ -2,6 +2,7 @@ package org.yearup;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction
 {
@@ -11,6 +12,9 @@ public class Transaction
     private String description;
     private String vendor;
     private double amount;
+
+    // Time formatter
+    static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     // Constructors
     public Transaction(){}
@@ -42,6 +46,11 @@ public class Transaction
     public void setTime(LocalTime time)
     {
         this.time = time;
+    }
+
+    public String getFormattedTime()
+    {
+        return time.format(timeFormatter);
     }
 
     public String getDescription()

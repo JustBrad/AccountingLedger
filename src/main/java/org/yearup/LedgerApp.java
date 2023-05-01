@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class LedgerApp
 {
     static Scanner scanner = new Scanner(System.in);
-    static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     // Display Home screen
     public void displayHome()
@@ -60,13 +59,16 @@ public class LedgerApp
         // Set date & time to current
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
-        String formattedTime = time.format(timeFormatter);
 
-        System.out.println(date);
-        System.out.println(formattedTime);
-        System.out.println(description);
-        System.out.println(vendor);
-        System.out.println(amount);
+        // Make new transaction w/ these values
+        Transaction transaction = new Transaction(date, time, description, vendor, amount);
+
+        // Print values
+        System.out.println(transaction.getDate());
+        System.out.println(transaction.getFormattedTime());
+        System.out.println(transaction.getDescription());
+        System.out.println(transaction.getVendor());
+        System.out.println(transaction.getAmount());
     }
 
     public void run()
