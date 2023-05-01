@@ -118,10 +118,57 @@ public class LedgerApp
                     showAll(payments);
                     break;
                 case "R":
-                    //Reports
+                    displayReports();
                     break;
                 case "H":
                     return;
+                default:
+                    System.out.println("\nInvalid option.");
+                    break;
+            }
+        }
+    }
+
+    // Display Reports screen
+    public void displayReports()
+    {
+        while (true)
+        {
+            System.out.println("\n----------REPORTS----------\n");
+            System.out.println("What would you like to do?\n");
+            System.out.println("1) Generate Month to Date");
+            System.out.println("2) Generate Previous Month");
+            System.out.println("3) Generate Year to Date");
+            System.out.println("4) Generate Previous Year");
+            System.out.println("5) Search by Vendor");
+            System.out.println("0) Back");
+            System.out.println("H) Home\n");
+
+            System.out.print("Enter an option: ");
+            String option = scanner.nextLine().toUpperCase();
+
+            switch (option)
+            {
+                case "1":
+                    //month to date
+                    break;
+                case "2":
+                    //prev month
+                    break;
+                case "3":
+                    //year to date
+                    break;
+                case "4":
+                    //prev year
+                    break;
+                case "5":
+                    //search by vendor
+                    break;
+                case "0":
+                    return;
+                case "H":
+                    displayHome();
+                    break;
                 default:
                     System.out.println("\nInvalid option.");
                     break;
@@ -324,7 +371,7 @@ public class LedgerApp
         }
     }
 
-    // Show all transactions
+    // Show all entries of specified ArrayList (transactions, deposits, payments)
     public void showAll(ArrayList<Transaction> list)
     {
         if(list == transactions) {System.out.println("\n----------SHOW-ALL----------\n");}
