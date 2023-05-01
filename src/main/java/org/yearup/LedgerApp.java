@@ -41,6 +41,11 @@ public class LedgerApp
         }
     }
 
+    public void addDeposit()
+    {
+        
+    }
+
     public void run()
     {
         displayHome();
