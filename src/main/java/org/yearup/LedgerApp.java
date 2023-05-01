@@ -181,6 +181,10 @@ public class LedgerApp
     {
         // Prompt user for description, vendor & amount
         System.out.println("\n----------ADD-DEPOSIT----------\n");
+        System.out.print("Enter a date (YYYY-MM-DD): ");
+        LocalDate date = LocalDate.parse(scanner.nextLine());
+        System.out.print("Enter a time (HH:MM:SS): ");
+        LocalTime time = LocalTime.parse(scanner.nextLine());
         System.out.print("Enter a description: ");
         String description = scanner.nextLine().strip();
         System.out.print("Enter vendor name: ");
@@ -207,10 +211,6 @@ public class LedgerApp
             }
         }
 
-        // Set date & time to current
-        LocalDate date = LocalDate.now();
-        LocalTime time = LocalTime.now();
-
         // Make new transaction w/ these values
         Transaction t = new Transaction(date, time, description, vendor, amount);
 
@@ -227,6 +227,10 @@ public class LedgerApp
     {
         // Prompt user for description, vendor & amount
         System.out.println("\n----------MAKE-PAYMENT----------\n");
+        System.out.print("Enter a date (YYYY-MM-DD): ");
+        LocalDate date = LocalDate.parse(scanner.nextLine());
+        System.out.print("Enter a time (HH:MM:SS): ");
+        LocalTime time = LocalTime.parse(scanner.nextLine());
         System.out.print("Enter a description: ");
         String description = scanner.nextLine().strip();
         System.out.print("Enter vendor name: ");
@@ -253,10 +257,6 @@ public class LedgerApp
                 System.out.println("The amount cannot be zero.\n");
             }
         }
-
-        // Set date & time to current
-        LocalDate date = LocalDate.now();
-        LocalTime time = LocalTime.now();
 
         // Make new transaction w/ these values
         Transaction t = new Transaction(date, time, description, vendor, amount);
