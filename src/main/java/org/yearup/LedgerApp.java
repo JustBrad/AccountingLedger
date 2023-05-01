@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class LedgerApp
@@ -15,6 +16,7 @@ public class LedgerApp
     static ArrayList<Transaction> transactions = new ArrayList<>();
     static ArrayList<Transaction> deposits = new ArrayList<>();
     static ArrayList<Transaction> payments = new ArrayList<>();
+    static HashMap<Transaction, String> vendorMap = new HashMap<>();
 
     // Returns negative value of given number
     public double makeNegative(double num)
@@ -162,7 +164,7 @@ public class LedgerApp
                     generatePreviousYear();
                     break;
                 case "5":
-                    //search by vendor
+                    searchByVendor();
                     break;
                 case "0":
                     return;
@@ -231,6 +233,9 @@ public class LedgerApp
         transactions.add(t);
         deposits.add(t);
 
+        // Add entries to vendor HashMap
+        vendorMap.put(t, vendor.toUpperCase());
+
         // Write to file
         writeTransaction(t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), t.getAmount());
     }
@@ -290,6 +295,9 @@ public class LedgerApp
         // Add to respective lists
         transactions.add(t);
         payments.add(t);
+
+        // Add entries to vendor HashMap
+        vendorMap.put(t, vendor.toUpperCase());
 
         // Write to file
         writeTransaction(t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), t.getAmount());
@@ -374,6 +382,9 @@ public class LedgerApp
                 {
                     payments.add(t);
                 }
+
+                // Add entries to vendor HashMap
+                vendorMap.put(t, vendor.toUpperCase());
             }
         }
         catch(IOException e)
@@ -573,6 +584,17 @@ public class LedgerApp
         System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
     }
 
+    // Lists all entries of specified vendor
+    public void searchByVendor()
+    {
+        System.out.println("\n----------SEARCH-BY-VENDOR----------\n");
+        System.out.print("Enter vendor name: ");
+        String vendor = scanner.nextLine().toUpperCase();
+
+        
+    }
+
+    // Run
     public void run()
     {
         // Read csv once to get existing data
