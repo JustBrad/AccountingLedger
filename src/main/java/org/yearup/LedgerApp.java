@@ -11,6 +11,12 @@ public class LedgerApp
     static String fileName = "transactions.csv";
     static Scanner scanner = new Scanner(System.in);
 
+    // Returns negative value of given number
+    public double makeNegative(double num)
+    {
+        return 0 - num;
+    }
+
     // Display Home screen
     public void displayHome()
     {
@@ -32,7 +38,7 @@ public class LedgerApp
                     addDeposit();
                     break;
                 case "P":
-                    // Make payment
+                    makePayment();
                     break;
                 case "L":
                     // Display Ledger screen
@@ -66,6 +72,49 @@ public class LedgerApp
             // Handle 0 or negative values
             if(amount > 0)
             {
+                break;
+            }
+            else if(amount < 0)
+            {
+                System.out.println("\nThe amount cannot be negative.\n");
+            }
+            else
+            {
+                System.out.println("The amount cannot be zero.\n");
+            }
+        }
+
+        // Set date & time to current
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.now();
+
+        // Make new transaction w/ these values
+        Transaction t = new Transaction(date, time, description, vendor, amount);
+
+        // Write to file
+        writeTransaction(t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), t.getAmount());
+    }
+
+    // Append a payment to csv
+    public void makePayment()
+    {
+        // Prompt user for description, vendor & amount
+        System.out.println("\n----------MAKE-PAYMENT----------\n");
+        System.out.print("Enter a description: ");
+        String description = scanner.nextLine().strip();
+        System.out.print("Enter vendor name: ");
+        String vendor = scanner.nextLine().strip();
+        double amount;
+
+        while(true)
+        {
+            System.out.print("Enter amount: $");
+            amount = Double.parseDouble(scanner.nextLine().strip());
+
+            // Handle 0 or negative values
+            if(amount > 0)
+            {
+                amount = makeNegative(amount);
                 break;
             }
             else if(amount < 0)
@@ -131,7 +180,14 @@ public class LedgerApp
             // Append to file
             writer = new FileWriter(fileName, true);
             writer.write("\n" + date.toString() + "|" + time + "|" + description + "|" + vendor + "|" + String.format("%.2f", amount));
-            System.out.println("\nDeposit added.");
+            if(amount > 0)
+            {
+                System.out.printf("\nDeposit added. (+$%.2f)\n", amount);
+            }
+            else
+            {
+                System.out.printf("\nPayment added. (-$%.2f)\n", makeNegative(amount));
+            }
         }
         catch(IOException e)
         {
