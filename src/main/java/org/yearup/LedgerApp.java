@@ -190,7 +190,7 @@ public class LedgerApp
     // Append a deposit to csv
     public void addDeposit()
     {
-        // Prompt user for description, vendor & amount
+        // Prompt user
         System.out.println("\n----------ADD-DEPOSIT----------\n");
         LocalDate date;
         LocalTime time;
@@ -215,6 +215,7 @@ public class LedgerApp
         String vendor = scanner.nextLine().strip().toUpperCase();
         double amount;
 
+        // Prevent negatives & zero
         while(true)
         {
             System.out.print("Enter amount: $");
@@ -277,6 +278,7 @@ public class LedgerApp
         String vendor = scanner.nextLine().strip().toUpperCase();
         double amount;
 
+        // Prevent negatives & zero
         while(true)
         {
             System.out.print("Enter amount: $");
@@ -315,19 +317,24 @@ public class LedgerApp
     // Write transaction to transactions.csv
     public void writeTransaction(LocalDate date, String time, String description, String vendor, double amount)
     {
+        // Initialize FileWriter
         FileWriter writer = null;
 
+        // Catch errors
         try
         {
             // Open file in APPEND mode
             writer = new FileWriter(fileName, true);
             writer.write("\n" + date.toString() + "|" + time + "|" + description + "|" + vendor + "|" + String.format("%.2f", amount));
+
+            // Decide if deposit or payment
             if(amount > 0)
             {
                 System.out.printf("\nDeposit added. (+$%.2f)\n", amount);
             }
             else
             {
+                // If payment, then make number negative
                 System.out.printf("\nPayment added. (-$%.2f)\n", makeNegative(amount));
             }
         }
@@ -354,6 +361,7 @@ public class LedgerApp
     // Read file & add entries to variables (ONLY FOR INITIAL RUN)
     public void readCsv()
     {
+        // Initialize input stream & file scanner
         FileInputStream fileStream = null;
         Scanner fileScanner = null;
 
@@ -436,7 +444,7 @@ public class LedgerApp
     {
         LocalDate currentDate;
 
-        // Get current date & first day of month
+        // Handle invalid date
         while(true)
         {
             try
@@ -477,7 +485,7 @@ public class LedgerApp
     {
         LocalDate currentDate;
 
-        // Get current date & first day of month
+        // Handle invalid date
         while(true)
         {
             try
@@ -520,7 +528,7 @@ public class LedgerApp
     {
         LocalDate currentDate;
 
-        // Get current date & first day of month
+        // Handle invalid date
         while(true)
         {
             try
@@ -546,7 +554,7 @@ public class LedgerApp
 
         for(Transaction t : transactions)
         {
-            // If entry is from start of month (including the 1st) to current date (including current date)
+            // If entry is from start of year (including the 1st) to current date (including current date)
             if(t.getDate().isAfter(firstDayOfYear.minusDays(1)) && t.getDate().isBefore(currentDate.plusDays(1)))
             {
                 printEntry(t);
@@ -562,7 +570,7 @@ public class LedgerApp
     {
         LocalDate currentDate;
 
-        // Get current date & first day of month
+        // Handle invalid date
         while(true)
         {
             try
@@ -589,7 +597,7 @@ public class LedgerApp
 
         for(Transaction t : transactions)
         {
-            // If entry is from start of previous year (including the 1st) to start of current year (not including 1st)
+            // If entry is from start of previous year (including the 1st) to end of previous year
             if(t.getDate().isAfter(firstDayOfPreviousYear.minusDays(1)) && t.getDate().isBefore(firstDayOfYear))
             {
                 printEntry(t);
@@ -603,6 +611,7 @@ public class LedgerApp
     // Lists all entries of specified vendor
     public void searchByVendor()
     {
+        // Prompt user for vendor
         System.out.println("\n----------SEARCH-BY-VENDOR----------\n");
         System.out.print("Enter vendor name: ");
         String vendor = scanner.nextLine().toUpperCase();
