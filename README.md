@@ -106,7 +106,7 @@ Here is what it looks like:
 
 ![Show All](images/prevYear.png)
 
-### Code I'm Proud Of
+## Code I'm Proud Of
 Here is my method that generates a **Month To Date** report.
 I'm proud of this code for several reasons:
 
