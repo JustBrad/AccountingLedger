@@ -419,7 +419,7 @@ public class LedgerApp
         System.out.println("--------------------------------------------------------------------------------------------------------");
         for(Transaction t : list)
         {
-            System.out.printf("%-15s %-15s %-40s %-20s %10s\n", t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), t.getAmount());
+            System.out.printf("%-15s %-15s %-40s %-20s %10s\n", t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), String.format("%.2f", t.getAmount()));
             System.out.println("--------------------------------------------------------------------------------------------------------");
         }
     }
@@ -595,15 +595,33 @@ public class LedgerApp
         System.out.println("\nDate\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
         System.out.println("--------------------------------------------------------------------------------------------------------");
 
+        // Count vendors found
+        int entriesFound = 0;
+
         // For every entry in vendorMap, check if vendor matches & print
         for (Map.Entry<Transaction, String> map : vendorMap.entrySet())
         {
             if (map.getValue().equalsIgnoreCase(vendor))
             {
                 Transaction t = map.getKey();
-                System.out.printf("%-15s %-15s %-40s %-20s %10s\n", t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), t.getAmount());
+                System.out.printf("%-15s %-15s %-40s %-20s %10s\n", t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), String.format("%.2f", t.getAmount()));
                 System.out.println("--------------------------------------------------------------------------------------------------------");
+                entriesFound++;
             }
+        }
+
+        // Display number of vendors found
+        if(entriesFound > 1)
+        {
+            System.out.println("\nFOUND " + entriesFound + " ENTRIES FOR '" + vendor + "'");
+        }
+        else if(entriesFound == 1)
+        {
+            System.out.println("\nFOUND " + entriesFound + " ENTRY FOR '" + vendor + "'");
+        }
+        else
+        {
+            System.out.println("\nNO ENTRIES FOUND FOR '" + vendor + "'");
         }
     }
 
