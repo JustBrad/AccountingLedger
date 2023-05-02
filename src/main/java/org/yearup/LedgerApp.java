@@ -744,6 +744,8 @@ public class LedgerApp
         }
 
         System.out.println("\n----------MATCHES----------\n");
+        System.out.println("Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
+        System.out.println("--------------------------------------------------------------------------------------------------------");
 
         // Go through all transactions & check if it matches each filter
         // Go through each filter one by one (of not skipped)
