@@ -16,6 +16,8 @@ From the **Home** screen, you can choose one of the following:
 - **Ledger** - Display the Ledger screen
 - **Exit** - Exit the application
 
+![Home Screen](images/homeScreen.png)
+
 ## Adding Deposits/Making Payments
 After selecting **Add Deposit** or **Make Payment (Debit)**, you will be prompted for the following:
 - Date (YYYY-MM-DD)
@@ -26,6 +28,9 @@ After selecting **Add Deposit** or **Make Payment (Debit)**, you will be prompte
 
 If all inputs are valid, the entry will be added to the CSV file.
 
+![Add Deposit](images/addDeposit.png)
+![Make Payment](images/makePayment.png)
+
 ## Ledger Screen
 On the **Ledger** screen, you can choose one of the following:
 - **All** - Display all entries in the CSV
@@ -34,12 +39,15 @@ On the **Ledger** screen, you can choose one of the following:
 - **Reports** - Display the Reports screen
 - **Home** - Go back to the Home screen
 
+![Ledger Screen](images/ledgerScreen.png)
+
 ## Displaying Entries
 After selecting **All** from the Ledger screen, every single entry in the CSV file will be displayed:
-
-After selecting **Deposits** from the Ledger screen, all deposit entries will be displayed: 
-
-After selecting **Payments** from the Ledger screen, all payment entries will be displayed: 
+![Show All](images/showAll.png)
+After selecting **Deposits** from the Ledger screen, all deposit entries will be displayed:
+![Show Deposits](images/showDeposits.png)
+After selecting **Payments** from the Ledger screen, all payment entries will be displayed:
+![Show Payments](images/showPayments.png)
 
 ## Reports Screen
 On the **Reports** screen, you can choose one of the following:
@@ -63,23 +71,29 @@ On the **Reports** screen, you can choose one of the following:
 
 - **Home** - Go back to the Home screen
 
+![Show All](images/reportsScreen.png)
+
 ## Generating Reports
 **NOTE:** You will be prompted for a current date (YYYY-MM-DD) when generating reports.
 The CSV file is preloaded with entries from November 2022 to March 2023, so any date in that time frame will work.
 
 ### Month To Date Report
 This report goes from the first day of the current month to the current day of the month (including first & current day).
-Here is what it looks like: 
+Here is what it looks like:
+![Show All](images/monthToDate.png)
 
 ### Previous Month Report
 This report goes from the first day of the previous month to the last day of the previous month (including first & last day).
-Here is what it looks like: 
+Here is what it looks like:
+![Show All](images/prevMonth.png)
 
 ### Year To Date Report
 This report goes from the first day of the current year to the current day of the year (including first & current day).
-Here is what it looks like: 
+Here is what it looks like:
+![Show All](images/yearToDate.png)
 
 ### Previous Year Report
 This report goes from the first day of the previous year to the last day of the previous year (including first & last day).
-Here is what it looks like: 
+Here is what it looks like:
+![Show All](images/prevYear.png)
 
