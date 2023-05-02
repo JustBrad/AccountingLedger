@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class LedgerApp
 {
+    // Create input scanner & variable for CSV file
     static String fileName = "transactions.csv";
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Transaction> transactions = new ArrayList<>();
