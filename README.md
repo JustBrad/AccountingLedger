@@ -72,6 +72,9 @@ On the **Reports** screen, you can choose one of the following:
 - **Search by Vendor** - Display all entries from specified vendor
 
 
+- **Custom Search** - Display all entries that meet a certain criteria
+
+
 - **Back** - Go back to the Ledger screen
 
 
