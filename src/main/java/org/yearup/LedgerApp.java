@@ -617,7 +617,7 @@ public class LedgerApp
     {
         // Prompt user for vendor
         System.out.println("\n----------SEARCH-BY-VENDOR----------\n");
-        System.out.print("Enter vendor name: ");
+        System.out.print("Enter vendor name (partial/full): ");
         String vendor = scanner.nextLine().toUpperCase();
 
         System.out.println("\nDate\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
@@ -629,7 +629,7 @@ public class LedgerApp
         // For every entry in vendorMap, check if vendor matches & print
         for (Map.Entry<Transaction, String> map : vendorMap.entrySet())
         {
-            if (map.getValue().equalsIgnoreCase(vendor))
+            if (map.getValue().contains(vendor))
             {
                 Transaction t = map.getKey();
                 printEntry(t);
@@ -659,6 +659,10 @@ public class LedgerApp
 
         System.out.println("Enter a value to filter by or enter 'X' to skip\n");
 
+        int numMatches = 0;
+
+        boolean startDateSkipped = false;
+        boolean endDateSkipped = false;
         boolean descriptionSkipped = false;
         boolean vendorSkipped = false;
         boolean amountSkipped = false;
@@ -683,6 +687,7 @@ public class LedgerApp
                     if (sDate.equalsIgnoreCase("X"))
                     {
                         startDate = LocalDate.parse("0001-01-01");
+                        startDateSkipped = true;
                     } else
                     {
                         startDate = LocalDate.parse(sDate);
@@ -694,6 +699,7 @@ public class LedgerApp
                     if (eDate.equalsIgnoreCase("X"))
                     {
                         endDate = LocalDate.parse("9999-12-31");
+                        endDateSkipped = true;
                     } else
                     {
                         endDate = LocalDate.parse(eDate);
@@ -708,7 +714,7 @@ public class LedgerApp
             }
 
             // Set description or skip
-            System.out.print("Enter description: ");
+            System.out.print("Enter description (partial/full): ");
             description = scanner.nextLine().toUpperCase().strip();
             if(description.equalsIgnoreCase("X"))
             {
@@ -716,7 +722,7 @@ public class LedgerApp
             }
 
             // Set vendor or skip
-            System.out.print("Enter vendor: ");
+            System.out.print("Enter vendor (partial/full): ");
             vendor = scanner.nextLine().toUpperCase().strip();
             if(vendor.equalsIgnoreCase("X"))
             {
@@ -724,7 +730,7 @@ public class LedgerApp
             }
 
             // Set amount or skip
-            System.out.print("Enter amount (can use '-'): $");
+            System.out.print("Enter amount (use '-' for payments): $");
             String sAmount = scanner.nextLine().toUpperCase().strip();
             if(sAmount.equalsIgnoreCase("X"))
             {
@@ -737,11 +743,65 @@ public class LedgerApp
             break;
         }
 
-        System.out.println(startDate);
-        System.out.println(endDate);
-        System.out.println(description);
-        System.out.println(vendor);
-        System.out.println(amount);
+        System.out.println("\n----------MATCHES----------\n");
+
+        // Go through all transactions & check if it matches each filter
+        // Go through each filter one by one (of not skipped)
+        for(Transaction t : transactions)
+        {
+            boolean matches = true;
+
+            // Check start date
+            if(!startDateSkipped && t.getDate().isBefore(startDate))
+            {
+                matches = false;
+            }
+
+            // Check end date
+            if(!endDateSkipped && t.getDate().isAfter(endDate))
+            {
+                matches = false;
+            }
+
+            // Check description
+            if(!descriptionSkipped && !t.getDescription().toUpperCase().contains(description))
+            {
+                matches = false;
+            }
+
+            // Check vendor
+            if(!vendorSkipped && !t.getVendor().toUpperCase().contains(vendor))
+            {
+                matches = false;
+            }
+
+            // Check amount
+            if(!amountSkipped && t.getAmount() != amount)
+            {
+                matches = false;
+            }
+
+            // If entry matches all criteria, then print & add 1 to number of matches
+            if(matches)
+            {
+                printEntry(t);
+                numMatches++;
+            }
+        }
+
+        // Print how many matches found (if any)
+        if(numMatches > 1)
+        {
+            System.out.println("\nFOUND " + numMatches + " MATCHES!");
+        }
+        else if(numMatches == 1)
+        {
+            System.out.println("\nFOUND " + numMatches + " MATCH!");
+        }
+        else
+        {
+            System.out.println("\nNO MATCHES FOUND.");
+        }
     }
 
     // Run
