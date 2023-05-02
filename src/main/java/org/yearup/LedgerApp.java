@@ -682,7 +682,7 @@ public class LedgerApp
                 try
                 {
                     // Set start date or skip with 'X'
-                    System.out.print("Enter start date: ");
+                    System.out.print("Enter start date (YYYY-MM-DD): ");
                     String sDate = scanner.nextLine().strip();
                     if (sDate.equalsIgnoreCase("X"))
                     {
@@ -694,7 +694,7 @@ public class LedgerApp
                     }
 
                     // Set end date or skip with 'X'
-                    System.out.print("Enter end date: ");
+                    System.out.print("Enter end date (YYYY-MM-DD): ");
                     String eDate = scanner.nextLine().strip();
                     if (eDate.equalsIgnoreCase("X"))
                     {
