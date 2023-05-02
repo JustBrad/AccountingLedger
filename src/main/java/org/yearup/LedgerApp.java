@@ -152,6 +152,7 @@ public class LedgerApp
             System.out.println("3) Generate Year to Date");
             System.out.println("4) Generate Previous Year");
             System.out.println("5) Search by Vendor");
+            System.out.println("6) Custom Search");
             System.out.println("0) Back");
             System.out.println("H) Home\n");
 
@@ -174,6 +175,9 @@ public class LedgerApp
                     break;
                 case "5":
                     searchByVendor();
+                    break;
+                case "6":
+                    customSearch();
                     break;
                 case "0":
                     return;
@@ -608,7 +612,7 @@ public class LedgerApp
         System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
     }
 
-    // Lists all entries of specified vendor
+    // Lists all entries for specified vendor
     public void searchByVendor()
     {
         // Prompt user for vendor
@@ -646,6 +650,56 @@ public class LedgerApp
         {
             System.out.println("\nNO ENTRIES FOUND FOR '" + vendor + "'");
         }
+    }
+
+    // List all entries for custom search
+    public void customSearch()
+    {
+        System.out.println("\n----------CUSTOM-SEARCH----------\n");
+
+        System.out.println("Enter a value to filter by or enter 'X' to skip\n");
+
+        LocalDate startDate;
+        LocalDate endDate;
+
+        // Handle invalid date & get start/end dates
+        while(true)
+        {
+            try
+            {
+                // Set start date or skip with 'X'
+                System.out.print("Enter start date: ");
+                String sDate = scanner.nextLine().strip();
+                if(sDate.equalsIgnoreCase("X"))
+                {
+                    startDate = LocalDate.parse("0001-01-01");
+                }
+                else
+                {
+                    startDate = LocalDate.parse(sDate);
+                }
+
+                // Set end date or skip with 'X'
+                System.out.print("Enter end date: ");
+                String eDate = scanner.nextLine().strip();
+                if(eDate.equalsIgnoreCase("X"))
+                {
+                    endDate = LocalDate.parse("9999-12-31");
+                }
+                else
+                {
+                    endDate = LocalDate.parse(eDate);
+                }
+                break;
+            }
+            catch(Exception e)
+            {
+                System.out.println("\nInvalid date.\n");
+            }
+        }
+
+        System.out.println(startDate);
+        System.out.println(endDate);
     }
 
     // Run
