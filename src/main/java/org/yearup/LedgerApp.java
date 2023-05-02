@@ -659,47 +659,89 @@ public class LedgerApp
 
         System.out.println("Enter a value to filter by or enter 'X' to skip\n");
 
-        LocalDate startDate;
-        LocalDate endDate;
+        boolean descriptionSkipped = false;
+        boolean vendorSkipped = false;
+        boolean amountSkipped = false;
 
-        // Handle invalid date & get start/end dates
+        LocalDate startDate = LocalDate.parse("0001-01-01");
+        LocalDate endDate = LocalDate.parse("9999-12-31");;
+        String description = "";
+        String vendor = "";
+        double amount = 0;
+
+        // Get filters
         while(true)
         {
-            try
+            // Handle invalid dates
+            while(true)
             {
-                // Set start date or skip with 'X'
-                System.out.print("Enter start date: ");
-                String sDate = scanner.nextLine().strip();
-                if(sDate.equalsIgnoreCase("X"))
+                try
                 {
-                    startDate = LocalDate.parse("0001-01-01");
-                }
-                else
-                {
-                    startDate = LocalDate.parse(sDate);
-                }
+                    // Set start date or skip with 'X'
+                    System.out.print("Enter start date: ");
+                    String sDate = scanner.nextLine().strip();
+                    if (sDate.equalsIgnoreCase("X"))
+                    {
+                        startDate = LocalDate.parse("0001-01-01");
+                    } else
+                    {
+                        startDate = LocalDate.parse(sDate);
+                    }
 
-                // Set end date or skip with 'X'
-                System.out.print("Enter end date: ");
-                String eDate = scanner.nextLine().strip();
-                if(eDate.equalsIgnoreCase("X"))
-                {
-                    endDate = LocalDate.parse("9999-12-31");
+                    // Set end date or skip with 'X'
+                    System.out.print("Enter end date: ");
+                    String eDate = scanner.nextLine().strip();
+                    if (eDate.equalsIgnoreCase("X"))
+                    {
+                        endDate = LocalDate.parse("9999-12-31");
+                    } else
+                    {
+                        endDate = LocalDate.parse(eDate);
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    endDate = LocalDate.parse(eDate);
+                    System.out.println("\nInvalid date.\n");
+                    continue;
                 }
                 break;
             }
-            catch(Exception e)
+
+            // Set description or skip
+            System.out.print("Enter description: ");
+            description = scanner.nextLine().toUpperCase().strip();
+            if(description.equalsIgnoreCase("X"))
             {
-                System.out.println("\nInvalid date.\n");
+                descriptionSkipped = true;
             }
+
+            // Set vendor or skip
+            System.out.print("Enter vendor: ");
+            vendor = scanner.nextLine().toUpperCase().strip();
+            if(vendor.equalsIgnoreCase("X"))
+            {
+                vendorSkipped = true;
+            }
+
+            // Set amount or skip
+            System.out.print("Enter amount (can use '-'): $");
+            String sAmount = scanner.nextLine().toUpperCase().strip();
+            if(sAmount.equalsIgnoreCase("X"))
+            {
+                amountSkipped = true;
+            }
+            else
+            {
+                amount = Double.parseDouble(sAmount);
+            }
+            break;
         }
 
         System.out.println(startDate);
         System.out.println(endDate);
+        System.out.println(description);
+        System.out.println(vendor);
+        System.out.println(amount);
     }
 
     // Run
