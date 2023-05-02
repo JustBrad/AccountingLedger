@@ -106,3 +106,66 @@ Here is what it looks like:
 
 ![Show All](images/prevYear.png)
 
+### Code I'm Proud Of
+Here is my method that generates a **Month To Date** report.
+I'm proud of this code for several reasons:
+
+- I was able to handle invalid inputs for currentDate without crashing the program.
+
+
+- I learned a lot about the LocalDate class with methods like:
+  - withDayOfMonth()
+  - getMonth()
+  - getDayOfMonth()
+  - getYear()
+  - getDate()
+  - isAfter()
+  - isBefore()
+  - minusDays()
+  - plusDays()
+
+
+- I was not taught in-depth about the LocalDate class, so I had to do a bit of my own research.
+Once I got the hang of a few of the methods, the rest came pretty easy and they're pretty straight-forward.
+
+```java
+public void generateMonthToDate()
+{
+    LocalDate currentDate;
+
+    // Handle invalid date
+    while(true)
+    {
+        try
+        {
+            System.out.print("Enter current date: ");
+            currentDate = LocalDate.parse(scanner.nextLine().strip());
+            break;
+        }
+        catch(Exception e)
+        {
+            System.out.println("\nInvalid date.\n");
+        }
+    }
+    LocalDate firstDayOfMonth = currentDate.withDayOfMonth(1);
+    double totalAmount = 0.0;
+
+    System.out.println("\n----------MONTH-TO-DATE----------\n");
+    System.out.println("CURRENT DATE: " + currentDate.getMonth() + " " + currentDate.getDayOfMonth() + ", " + currentDate.getYear() + "\n");
+
+    System.out.println("Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
+    System.out.println("--------------------------------------------------------------------------------------------------------");
+
+    for(Transaction t : transactions)
+    {
+        // If entry is from start of month (including the 1st) to current date (including current date)
+        if(t.getDate().isAfter(firstDayOfMonth.minusDays(1)) && t.getDate().isBefore(currentDate.plusDays(1)))
+        {
+            printEntry(t);
+            totalAmount += t.getAmount();
+        }
+    }
+
+    System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
+}
+```
