@@ -530,13 +530,16 @@ public class LedgerApp
         System.out.println("CURRENT DATE: " + currentDate.getMonth() + " " + currentDate.getDayOfMonth() + ", " + currentDate.getYear() + "\n");
         System.out.println("YEAR OF: " + currentDate.getYear() + "\n");
 
+        System.out.println("Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
+        System.out.println("--------------------------------------------------------------------------------------------------------");
+
         for(Transaction t : transactions)
         {
-            // If entry is from start of month (including the 1st) to current date
-            if(t.getDate().isEqual(firstDayOfYear) || t.getDate().isAfter(firstDayOfYear))
+            // If entry is from start of month (including the 1st) to current date (including current date)
+            if(t.getDate().isAfter(firstDayOfYear.minusDays(1)) && t.getDate().isBefore(currentDate.plusDays(1)))
             {
-                System.out.printf("%-40s %10.2f\n", t.getDescription(), t.getAmount());
-                System.out.println("---------------------------------------------------");
+                System.out.printf("%-15s %-15s %-40s %-20s %10s\n", t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), String.format("%.2f", t.getAmount()));
+                System.out.println("--------------------------------------------------------------------------------------------------------");
                 totalAmount += t.getAmount();
             }
         }
