@@ -461,7 +461,7 @@ public class LedgerApp
         for(Transaction t : transactions)
         {
             // If entry is from start of month (including the 1st) to current date
-            if(t.getDate().isAfter(firstDayOfMonth.minusDays(1)) && t.getDate().isBefore(currentDate))
+            if(t.getDate().isAfter(firstDayOfMonth.minusDays(1)) && t.getDate().isBefore(currentDate.plusDays(1)))
             {
                 printEntry(t);
                 totalAmount += t.getAmount();
