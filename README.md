@@ -88,24 +88,32 @@ The CSV file is preloaded with entries from November 2022 to March 2023, so any 
 
 ### Month To Date Report
 This report goes from the first day of the current month to the current day of the month (including first & current day).
+A total of all deposits & payments is displayed at the bottom.
+
 Here is what it looks like:
 
 ![Show All](images/monthToDate.png)
 
 ### Previous Month Report
 This report goes from the first day of the previous month to the last day of the previous month (including first & last day).
+A total of all deposits & payments is displayed at the bottom.
+
 Here is what it looks like:
 
 ![Show All](images/prevMonth.png)
 
 ### Year To Date Report
 This report goes from the first day of the current year to the current day of the year (including first & current day).
+A total of all deposits & payments is displayed at the bottom.
+
 Here is what it looks like:
 
 ![Show All](images/yearToDate.png)
 
 ### Previous Year Report
 This report goes from the first day of the previous year to the last day of the previous year (including first & last day).
+A total of all deposits & payments is displayed at the bottom.
+
 Here is what it looks like:
 
 ![Show All](images/prevYear.png)
