@@ -77,7 +77,7 @@ public class LedgerApp
             System.out.println("X) Exit\n");
 
             System.out.print("Enter an option: ");
-            String option = scanner.nextLine().toUpperCase();
+            String option = scanner.nextLine().toUpperCase().strip();
 
             switch (option)
             {
@@ -114,7 +114,7 @@ public class LedgerApp
             System.out.println("H) Home\n");
 
             System.out.print("Enter an option: ");
-            String option = scanner.nextLine().toUpperCase();
+            String option = scanner.nextLine().toUpperCase().strip();
 
             switch (option)
             {
@@ -155,7 +155,7 @@ public class LedgerApp
             System.out.println("H) Home\n");
 
             System.out.print("Enter an option: ");
-            String option = scanner.nextLine().toUpperCase();
+            String option = scanner.nextLine().toUpperCase().strip();
 
             switch (option)
             {
@@ -318,7 +318,7 @@ public class LedgerApp
 
         try
         {
-            // Append to file
+            // Open file in APPEND mode
             writer = new FileWriter(fileName, true);
             writer.write("\n" + date.toString() + "|" + time + "|" + description + "|" + vendor + "|" + String.format("%.2f", amount));
             if(amount > 0)
@@ -460,7 +460,7 @@ public class LedgerApp
 
         for(Transaction t : transactions)
         {
-            // If entry is from start of month (including the 1st) to current date
+            // If entry is from start of month (including the 1st) to current date (including current date)
             if(t.getDate().isAfter(firstDayOfMonth.minusDays(1)) && t.getDate().isBefore(currentDate.plusDays(1)))
             {
                 printEntry(t);
@@ -503,7 +503,7 @@ public class LedgerApp
 
         for(Transaction t : transactions)
         {
-            // If entry is from start of month (including the 1st) to current date
+            // If entry is from start of previous month (including the 1st) to end of previous month
             if(t.getDate().isAfter(firstDayOfPreviousMonth.minusDays(1)) && t.getDate().isBefore(firstDayOfMonth))
             {
                 printEntry(t);
