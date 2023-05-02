@@ -106,6 +106,28 @@ Here is what it looks like:
 
 ![Show All](images/prevYear.png)
 
+## Search By Vendor
+When searching by vendor, you'll be prompted to enter the name of the vendor.
+A list of all entries containing the specified vendor will then be displayed. 
+
+**NOTE:** You don't have to enter the full name of the vendor, partial names work as well. (See below)
+
+![Search By Vendor](images/searchByVendor.png)
+
+## Custom Search
+When performing a custom search, you will be prompted for the following:
+- Start Date
+- End Date
+- Description
+- Vendor
+- Amount
+
+If you don't want to filter by a particular category, simply enter 'X' to skip it.
+
+**NOTE:** Just like searching by vendor, you can enter partial values for Description and Vendor and the search will find all entries that contain those specified values. (See below)
+
+![Custom Search](images/customSearch.png)
+
 ## Code I'm Proud Of
 Here is my method that generates a **Month To Date** report.
 I'm proud of this code for several reasons:
