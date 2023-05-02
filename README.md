@@ -8,6 +8,7 @@ It allows you to add new entries, view them in a ledger, and generate various re
 - View entries in the ledger (All, Deposits Only, Payments Only)
 - Generate reports for month to date, previous month, year to date, previous year
 - Search for entries by vendor
+- Search for entries with custom filter
 
 ## Home Screen
 From the **Home** screen, you can choose one of the following:
