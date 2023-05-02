@@ -138,7 +138,7 @@ If you don't want to filter by a particular category, simply enter 'X' to skip i
 
 **NOTE:** Just like searching by vendor, you can enter partial values for Description and Vendor and the search will find all entries that contain those specified values. (See below)
 
-![Custom Search](images/customSeach.png)
+![Custom Search](images/customSearch.png)
 
 ## Code I'm Proud Of
 Here is my method that generates a **Month To Date** report.
