@@ -87,13 +87,13 @@ public class LedgerApp
         while (true)
         {
             System.out.println("\n----------HOME-SCREEN----------\n");
-            System.out.println("What would you like to do?\n");
-            System.out.println("D) Add Deposit");
-            System.out.println("P) Make Payment (Debit)");
-            System.out.println("L) Display Ledger Screen");
-            System.out.println("X) Exit\n");
+            System.out.println(ColorCodes.BLACK_BACKGROUND + "What would you like to do?" + ColorCodes.RESET + "\n");
+            System.out.println(ColorCodes.CYAN + "D)" + ColorCodes.GREEN + " Add Deposit");
+            System.out.println(ColorCodes.CYAN + "P)" + ColorCodes.RED + " Make Payment (Debit)");
+            System.out.println(ColorCodes.CYAN + "L)" + ColorCodes.YELLOW + " Display Ledger Screen");
+            System.out.println(ColorCodes.CYAN + "X)" + ColorCodes.YELLOW + " Exit" + ColorCodes.RESET + "\n");
 
-            System.out.print("Enter an option: ");
+            System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter an option:" + ColorCodes.RESET + " ");
             String option = scanner.nextLine().toUpperCase().strip();
 
             switch (option)
