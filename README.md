@@ -17,7 +17,7 @@ From the **Home** screen, you can choose one of the following:
 - **Ledger** - Display the Ledger screen
 - **Exit** - Exit the application
 
-![Home Screen](images/.png)
+![Home Screen](images/homeScreen.png)
 
 ## Adding Deposits/Making Payments
 After selecting **Add Deposit** or **Make Payment (Debit)**, you will be prompted for the following:
@@ -29,8 +29,8 @@ After selecting **Add Deposit** or **Make Payment (Debit)**, you will be prompte
 
 If all inputs are valid, the entry will be added to the CSV file.
 
-![Add Deposit](images/.png)
-![Make Payment](images/.png)
+![Add Deposit](images/addDeposit.png)
+![Make Payment](images/makePayment.png)
 
 ## Ledger Screen
 On the **Ledger** screen, you can choose one of the following:
@@ -40,20 +40,20 @@ On the **Ledger** screen, you can choose one of the following:
 - **Reports** - Display the Reports screen
 - **Home** - Go back to the Home screen
 
-![Ledger Screen](images/.png)
+![Ledger Screen](images/ledgerScreen.png)
 
 ## Displaying Entries
 After selecting **All** from the Ledger screen, every single entry in the CSV file will be displayed:
 
-![Show All](images/.png)
+![Show All](images/showAll.png)
 
 After selecting **Deposits** from the Ledger screen, all deposit entries will be displayed:
 
-![Show Deposits](images/.png)
+![Show Deposits](images/showDeposits.png)
 
 After selecting **Payments** from the Ledger screen, all payment entries will be displayed:
 
-![Show Payments](images/.png)
+![Show Payments](images/showPayments.png)
 
 ## Reports Screen
 On the **Reports** screen, you can choose one of the following:
@@ -80,7 +80,7 @@ On the **Reports** screen, you can choose one of the following:
 
 - **Home** - Go back to the Home screen
 
-![Show All](images/.png)
+![Show All](images/reportsScreen.png)
 
 ## Generating Reports
 **NOTE:** You will be prompted for a current date (YYYY-MM-DD) when generating reports.
@@ -92,7 +92,7 @@ A total of all deposits & payments is displayed at the bottom.
 
 Here is what it looks like:
 
-![Show All](images/.png)
+![Month To Date](images/monthToDate.png)
 
 ### Previous Month Report
 This report goes from the first day of the previous month to the last day of the previous month (including first & last day).
@@ -100,7 +100,7 @@ A total of all deposits & payments is displayed at the bottom.
 
 Here is what it looks like:
 
-![Show All](images/.png)
+![Previous Month](images/prevMonth.png)
 
 ### Year To Date Report
 This report goes from the first day of the current year to the current day of the year (including first & current day).
@@ -108,7 +108,7 @@ A total of all deposits & payments is displayed at the bottom.
 
 Here is what it looks like:
 
-![Show All](images/.png)
+![Year To Date](images/yearToDate.png)
 
 ### Previous Year Report
 This report goes from the first day of the previous year to the last day of the previous year (including first & last day).
@@ -116,7 +116,7 @@ A total of all deposits & payments is displayed at the bottom.
 
 Here is what it looks like:
 
-![Show All](images/.png)
+![Previous Year](images/prevYear.png)
 
 ## Search By Vendor
 When searching by vendor, you'll be prompted to enter the name of the vendor.
@@ -124,7 +124,7 @@ A list of all entries containing the specified vendor will then be displayed.
 
 **NOTE:** You don't have to enter the full name of the vendor, partial names work as well. (See below)
 
-![Search By Vendor](images/.png)
+![Search By Vendor](images/searchByVendor.png)
 
 ## Custom Search
 When performing a custom search, you will be prompted for the following:
@@ -138,7 +138,7 @@ If you don't want to filter by a particular category, simply enter 'X' to skip i
 
 **NOTE:** Just like searching by vendor, you can enter partial values for Description and Vendor and the search will find all entries that contain those specified values. (See below)
 
-![Custom Search](images/.png)
+![Custom Search](images/customSearch.png)
 
 ## Code I'm Proud Of
 Here is my method that generates a **Month To Date** report.
