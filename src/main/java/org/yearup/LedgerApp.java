@@ -470,7 +470,7 @@ public class LedgerApp
         {
             try
             {
-                System.out.print("Enter current date: ");
+                System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter current date (YYYY-MM-DD):" + ColorCodes.RESET + " ");
                 currentDate = LocalDate.parse(scanner.nextLine().strip());
                 break;
             }
@@ -510,7 +510,7 @@ public class LedgerApp
         {
             try
             {
-                System.out.print("Enter current date: ");
+                System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter current date (YYYY-MM-DD):" + ColorCodes.RESET + " ");
                 currentDate = LocalDate.parse(scanner.nextLine().strip());
                 break;
             }
@@ -552,7 +552,7 @@ public class LedgerApp
         {
             try
             {
-                System.out.print("Enter current date: ");
+                System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter current date (YYYY-MM-DD):" + ColorCodes.RESET + " ");
                 currentDate = LocalDate.parse(scanner.nextLine().strip());
                 break;
             }
@@ -593,7 +593,7 @@ public class LedgerApp
         {
             try
             {
-                System.out.print("Enter current date: ");
+                System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter current date (YYYY-MM-DD):" + ColorCodes.RESET + " ");
                 currentDate = LocalDate.parse(scanner.nextLine().strip());
                 break;
             }
@@ -630,8 +630,9 @@ public class LedgerApp
     {
         // Prompt user for vendor
         System.out.println("\n----------SEARCH-BY-VENDOR----------\n");
-        System.out.print("Enter vendor name (partial/full): ");
+        System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter vendor name (partial/full):" + ColorCodes.RESET + " ");
         String vendor = scanner.nextLine().toUpperCase();
+        System.out.println();
 
         printLabels();
 
@@ -652,15 +653,15 @@ public class LedgerApp
         // Display number of vendors found
         if(entriesFound > 1)
         {
-            System.out.println("\nFOUND " + entriesFound + " ENTRIES FOR '" + vendor + "'");
+            System.out.println("\n" + ColorCodes.BLACK_BACKGROUND + "FOUND " + entriesFound + " ENTRIES FOR '" + vendor + "'" + ColorCodes.RESET);
         }
         else if(entriesFound == 1)
         {
-            System.out.println("\nFOUND " + entriesFound + " ENTRY FOR '" + vendor + "'");
+            System.out.println("\n" + ColorCodes.BLACK_BACKGROUND + "FOUND " + entriesFound + " ENTRY FOR '" + vendor + "'" + ColorCodes.RESET);
         }
         else
         {
-            System.out.println("\nNO ENTRIES FOUND FOR '" + vendor + "'");
+            System.out.println("\n" + ColorCodes.BLACK_BACKGROUND + "NO ENTRIES FOUND FOR '" + vendor + "'" + ColorCodes.RESET);
         }
     }
 
@@ -669,7 +670,7 @@ public class LedgerApp
     {
         System.out.println("\n----------CUSTOM-SEARCH----------\n");
 
-        System.out.println("Enter a value to filter by or enter 'X' to skip\n");
+        System.out.println(ColorCodes.BLACK_BACKGROUND + "Enter a value to filter by or enter 'X' to skip" + ColorCodes.RESET + "\n");
 
         int numMatches = 0;
 
@@ -694,7 +695,7 @@ public class LedgerApp
                 try
                 {
                     // Set start date or skip with 'X'
-                    System.out.print("Enter start date (YYYY-MM-DD): ");
+                    System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter start date (YYYY-MM-DD):" + ColorCodes.RESET + " ");
                     String sDate = scanner.nextLine().strip();
                     if (sDate.equalsIgnoreCase("X"))
                     {
@@ -706,7 +707,7 @@ public class LedgerApp
                     }
 
                     // Set end date or skip with 'X'
-                    System.out.print("Enter end date (YYYY-MM-DD): ");
+                    System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter end date (YYYY-MM-DD):" + ColorCodes.RESET + " ");
                     String eDate = scanner.nextLine().strip();
                     if (eDate.equalsIgnoreCase("X"))
                     {
@@ -726,7 +727,7 @@ public class LedgerApp
             }
 
             // Set description or skip
-            System.out.print("Enter description (partial/full): ");
+            System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter description (partial/full):" + ColorCodes.RESET + " ");
             description = scanner.nextLine().toUpperCase().strip();
             if(description.equalsIgnoreCase("X"))
             {
@@ -734,23 +735,34 @@ public class LedgerApp
             }
 
             // Set vendor or skip
-            System.out.print("Enter vendor (partial/full): ");
+            System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter vendor name (partial/full):" + ColorCodes.RESET + " ");
             vendor = scanner.nextLine().toUpperCase().strip();
             if(vendor.equalsIgnoreCase("X"))
             {
                 vendorSkipped = true;
             }
 
-            // Set amount or skip
-            System.out.print("Enter amount (use '-' for payments): $");
-            String sAmount = scanner.nextLine().toUpperCase().strip();
-            if(sAmount.equalsIgnoreCase("X"))
+            // Set amount or skip (Handle invalid input)
+            while(true)
             {
-                amountSkipped = true;
-            }
-            else
-            {
-                amount = Double.parseDouble(sAmount);
+                try
+                {
+                    System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter amount (use '-' for payments):" + ColorCodes.RESET + " $");
+                    String sAmount = scanner.nextLine().toUpperCase().strip();
+                    if (sAmount.equalsIgnoreCase("X"))
+                    {
+                        amountSkipped = true;
+                    } else
+                    {
+                        amount = Double.parseDouble(sAmount);
+                    }
+                }
+                catch(Exception e)
+                {
+                    System.out.println("\nInvalid amount.\n");
+                    continue;
+                }
+                break;
             }
             break;
         }
