@@ -723,6 +723,8 @@ public class LedgerApp
         boolean descriptionSkipped = false;
         boolean vendorSkipped = false;
         boolean amountSkipped = false;
+        boolean paymentsOnly = false;
+        boolean depositsOnly = false;
 
         LocalDate startDate = LocalDate.parse("0001-01-01");
         LocalDate endDate = LocalDate.parse("9999-12-31");;
@@ -796,7 +798,8 @@ public class LedgerApp
                     if (sAmount.equalsIgnoreCase("X"))
                     {
                         amountSkipped = true;
-                    } else
+                    }
+                    else
                     {
                         amount = Double.parseDouble(sAmount);
                     }
