@@ -29,7 +29,16 @@ public class LedgerApp
     // Print a formatted entry for Transaction t
     public void printEntry(Transaction t)
     {
-        System.out.printf("%-15s %-15s %-40s %-20s %10s\n", t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), String.format("%.2f", t.getAmount()));
+        // Amount is GREEN if positive
+        if(t.getAmount() > 0)
+        {
+            System.out.printf("%-15s %-15s %-40s %-20s" + ColorCodes.GREEN + " %10s\n" + ColorCodes.RESET, t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), String.format("%.2f", t.getAmount()));
+        }
+        // Amount is RED if negative
+        else
+        {
+            System.out.printf("%-15s %-15s %-40s %-20s" + ColorCodes.RED + " %10s\n" + ColorCodes.RESET, t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), String.format("%.2f", t.getAmount()));
+        }
         System.out.println("--------------------------------------------------------------------------------------------------------");
     }
 
