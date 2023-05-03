@@ -29,8 +29,8 @@ public class LedgerApp
     // Print formatted labels when displaying entries
     public void printLabels()
     {
-        System.out.println(ColorCodes.BLACK_BACKGROUND + "Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount" + ColorCodes.RESET);
-        System.out.println("--------------------------------------------------------------------------------------------------------");
+        System.out.println(ColorCodes.BLACK_BACKGROUND + "Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\tAmount" + ColorCodes.RESET);
+        System.out.println("------------------------------------------------------------------------------------------------------");
     }
 
     // Print a formatted entry for Transaction t
@@ -39,14 +39,14 @@ public class LedgerApp
         // Amount is GREEN if positive
         if(t.getAmount() > 0)
         {
-            System.out.printf("%-15s %-15s %-40s %-20s" + ColorCodes.GREEN + " %10s\n" + ColorCodes.RESET, t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), String.format("%.2f", t.getAmount()));
+            System.out.printf(ColorCodes.ORANGE + "%-15s %-15s" + ColorCodes.YELLOW + "%-40s" + ColorCodes.CYAN + "%-20s" + ColorCodes.GREEN + " %10s\n" + ColorCodes.RESET, t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), String.format("%.2f", t.getAmount()));
         }
         // Amount is RED if negative
         else
         {
-            System.out.printf("%-15s %-15s %-40s %-20s" + ColorCodes.RED + " %10s\n" + ColorCodes.RESET, t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), String.format("%.2f", t.getAmount()));
+            System.out.printf(ColorCodes.ORANGE + "%-15s %-15s" + ColorCodes.YELLOW + "%-40s" + ColorCodes.CYAN + "%-20s" + ColorCodes.RED + " %10s\n" + ColorCodes.RESET, t.getDate(), t.getFormattedTime(), t.getDescription(), t.getVendor(), String.format("%.2f", t.getAmount()));
         }
-        System.out.println("--------------------------------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------------------------");
     }
 
     // Overwrite csv and add first line
