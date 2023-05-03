@@ -90,8 +90,8 @@ public class LedgerApp
             System.out.println(ColorCodes.BLACK_BACKGROUND + "What would you like to do?" + ColorCodes.RESET + "\n");
             System.out.println(ColorCodes.CYAN + "D)" + ColorCodes.GREEN + " Add Deposit");
             System.out.println(ColorCodes.CYAN + "P)" + ColorCodes.RED + " Make Payment (Debit)");
-            System.out.println(ColorCodes.CYAN + "L)" + ColorCodes.PURPLE + " Display Ledger Screen");
-            System.out.println(ColorCodes.CYAN + "X)" + ColorCodes.PURPLE + " Exit" + ColorCodes.RESET + "\n");
+            System.out.println(ColorCodes.CYAN + "L) Display Ledger Screen");
+            System.out.println(ColorCodes.CYAN + "X) Exit" + ColorCodes.RESET + "\n");
 
             System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter an option:" + ColorCodes.RESET + " ");
             String option = scanner.nextLine().toUpperCase().strip();
@@ -127,8 +127,8 @@ public class LedgerApp
             System.out.println(ColorCodes.CYAN + "A)" + ColorCodes.YELLOW + " All");
             System.out.println(ColorCodes.CYAN + "D)" + ColorCodes.GREEN + " Deposits");
             System.out.println(ColorCodes.CYAN + "P)" + ColorCodes.RED + " Payments");
-            System.out.println(ColorCodes.CYAN + "R)" + ColorCodes.PURPLE + " Reports Screen");
-            System.out.println(ColorCodes.CYAN + "H)" + ColorCodes.PURPLE + " Home" + ColorCodes.RESET + "\n");
+            System.out.println(ColorCodes.CYAN + "R) Reports Screen");
+            System.out.println(ColorCodes.CYAN + "H) Home" + ColorCodes.RESET + "\n");
 
             System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter an option:" + ColorCodes.RESET + " ");
             String option = scanner.nextLine().toUpperCase().strip();
@@ -162,17 +162,17 @@ public class LedgerApp
         while (true)
         {
             System.out.println("\n----------REPORTS----------\n");
-            System.out.println("What would you like to do?\n");
-            System.out.println("1) Generate Month to Date");
-            System.out.println("2) Generate Previous Month");
-            System.out.println("3) Generate Year to Date");
-            System.out.println("4) Generate Previous Year");
-            System.out.println("5) Search by Vendor");
-            System.out.println("6) Custom Search");
-            System.out.println("0) Back");
-            System.out.println("H) Home\n");
+            System.out.println(ColorCodes.BLACK_BACKGROUND + "What would you like to do?" + ColorCodes.RESET + "\n");
+            System.out.println(ColorCodes.CYAN + "1)" + ColorCodes.YELLOW + " Generate Month to Date");
+            System.out.println(ColorCodes.CYAN + "2)" + ColorCodes.YELLOW + " Generate Previous Month");
+            System.out.println(ColorCodes.CYAN + "3)" + ColorCodes.YELLOW + " Generate Year to Date");
+            System.out.println(ColorCodes.CYAN + "4)" + ColorCodes.YELLOW + " Generate Previous Year");
+            System.out.println(ColorCodes.CYAN + "5)" + ColorCodes.PURPLE + " Search by Vendor");
+            System.out.println(ColorCodes.CYAN + "6)" + ColorCodes.PURPLE + " Custom Search");
+            System.out.println(ColorCodes.CYAN + "0) Back");
+            System.out.println(ColorCodes.CYAN + "H) Home" + ColorCodes.RESET + "\n");
 
-            System.out.print("Enter an option: ");
+            System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter an option:" + ColorCodes.RESET + " ");
             String option = scanner.nextLine().toUpperCase().strip();
 
             switch (option)
@@ -218,9 +218,9 @@ public class LedgerApp
         {
             try
             {
-                System.out.print("Enter a date (YYYY-MM-DD): ");
+                System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter a date (YYYY-MM-DD):" + ColorCodes.RESET + " ");
                 date = LocalDate.parse(scanner.nextLine().strip());
-                System.out.print("Enter a time (HH:MM:SS): ");
+                System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter a time (HH:MM:SS):" + ColorCodes.RESET + " ");
                 time = LocalTime.parse(scanner.nextLine().strip());
                 break;
             }
@@ -229,16 +229,16 @@ public class LedgerApp
                 System.out.println("\nInvalid date/time.\n");
             }
         }
-        System.out.print("Enter a description: ");
+        System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter a description:" + ColorCodes.RESET + " ");
         String description = scanner.nextLine().strip().toUpperCase();
-        System.out.print("Enter vendor name: ");
+        System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter vendor name:" + ColorCodes.RESET + " ");
         String vendor = scanner.nextLine().strip().toUpperCase();
         double amount;
 
         // Prevent negatives & zero
         while(true)
         {
-            System.out.print("Enter amount: $");
+            System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter amount:" + ColorCodes.RESET + " $");
             amount = Double.parseDouble(scanner.nextLine().strip());
 
             // Handle 0 or negative values
@@ -281,9 +281,9 @@ public class LedgerApp
         {
             try
             {
-                System.out.print("Enter a date (YYYY-MM-DD): ");
+                System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter a date (YYYY-MM-DD):" + ColorCodes.RESET + " ");
                 date = LocalDate.parse(scanner.nextLine().strip());
-                System.out.print("Enter a time (HH:MM:SS): ");
+                System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter a time (HH:MM:SS):" + ColorCodes.RESET + " ");
                 time = LocalTime.parse(scanner.nextLine().strip());
                 break;
             }
@@ -292,16 +292,16 @@ public class LedgerApp
                 System.out.println("\nInvalid date/time.\n");
             }
         }
-        System.out.print("Enter a description: ");
+        System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter a description:" + ColorCodes.RESET + " ");
         String description = scanner.nextLine().strip().toUpperCase();
-        System.out.print("Enter vendor name: ");
+        System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter vendor name:" + ColorCodes.RESET + " ");
         String vendor = scanner.nextLine().strip().toUpperCase();
         double amount;
 
         // Prevent negatives & zero
         while(true)
         {
-            System.out.print("Enter amount: $");
+            System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter amount:" + ColorCodes.RESET + " $");
             amount = Double.parseDouble(scanner.nextLine().strip());
 
             // Handle 0 or negative values
@@ -350,12 +350,12 @@ public class LedgerApp
             // Decide if deposit or payment
             if(amount > 0)
             {
-                System.out.printf("\nDeposit added. (+$%.2f)\n", amount);
+                System.out.printf("\nDeposit added. " + ColorCodes.GREEN + "(+$%.2f)" + ColorCodes.RESET + "\n", amount);
             }
             else
             {
                 // If payment, then make number negative
-                System.out.printf("\nPayment added. (-$%.2f)\n", makeNegative(amount));
+                System.out.printf("\nPayment added. " + ColorCodes.RED + "(-$%.2f)" + ColorCodes.RESET + "\n", makeNegative(amount));
             }
         }
         catch(IOException e)
