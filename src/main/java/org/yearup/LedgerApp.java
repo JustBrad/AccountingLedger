@@ -497,7 +497,18 @@ public class LedgerApp
             }
         }
 
-        System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
+        if(totalAmount > 0)
+        {
+            System.out.printf("\n" + ColorCodes.BLACK_BACKGROUND + "TOTAL: " + ColorCodes.GREEN + "$%.2f" + ColorCodes.RESET + "\n", totalAmount);
+        }
+        else if(totalAmount < 0)
+        {
+            System.out.printf("\n" + ColorCodes.BLACK_BACKGROUND + "TOTAL: " + ColorCodes.RED + "$%.2f" + ColorCodes.RESET + "\n", totalAmount);
+        }
+        else
+        {
+            System.out.printf("\n" + ColorCodes.BLACK_BACKGROUND + "TOTAL: " + ColorCodes.YELLOW + "$%.2f" + ColorCodes.RESET + "\n", totalAmount);
+        }
     }
 
     // Generates report for Previous Month (Prompted for current date)
@@ -539,7 +550,18 @@ public class LedgerApp
             }
         }
 
-        System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
+        if(totalAmount > 0)
+        {
+            System.out.printf("\n" + ColorCodes.BLACK_BACKGROUND + "TOTAL: " + ColorCodes.GREEN + "$%.2f" + ColorCodes.RESET + "\n", totalAmount);
+        }
+        else if(totalAmount < 0)
+        {
+            System.out.printf("\n" + ColorCodes.BLACK_BACKGROUND + "TOTAL: " + ColorCodes.RED + "$%.2f" + ColorCodes.RESET + "\n", totalAmount);
+        }
+        else
+        {
+            System.out.printf("\n" + ColorCodes.BLACK_BACKGROUND + "TOTAL: " + ColorCodes.YELLOW + "$%.2f" + ColorCodes.RESET + "\n", totalAmount);
+        }
     }
 
     // Generates report for Year to Date (Prompted for current date)
@@ -580,7 +602,18 @@ public class LedgerApp
             }
         }
 
-        System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
+        if(totalAmount > 0)
+        {
+            System.out.printf("\n" + ColorCodes.BLACK_BACKGROUND + "TOTAL: " + ColorCodes.GREEN + "$%.2f" + ColorCodes.RESET + "\n", totalAmount);
+        }
+        else if(totalAmount < 0)
+        {
+            System.out.printf("\n" + ColorCodes.BLACK_BACKGROUND + "TOTAL: " + ColorCodes.RED + "$%.2f" + ColorCodes.RESET + "\n", totalAmount);
+        }
+        else
+        {
+            System.out.printf("\n" + ColorCodes.BLACK_BACKGROUND + "TOTAL: " + ColorCodes.YELLOW + "$%.2f" + ColorCodes.RESET + "\n", totalAmount);
+        }
     }
 
     // Generates report for Previous Year (Prompted for current date)
@@ -622,7 +655,18 @@ public class LedgerApp
             }
         }
 
-        System.out.printf("\nTOTAL: $%.2f\n", totalAmount);
+        if(totalAmount > 0)
+        {
+            System.out.printf("\n" + ColorCodes.BLACK_BACKGROUND + "TOTAL: " + ColorCodes.GREEN + "$%.2f" + ColorCodes.RESET + "\n", totalAmount);
+        }
+        else if(totalAmount < 0)
+        {
+            System.out.printf("\n" + ColorCodes.BLACK_BACKGROUND + "TOTAL: " + ColorCodes.RED + "$%.2f" + ColorCodes.RESET + "\n", totalAmount);
+        }
+        else
+        {
+            System.out.printf("\n" + ColorCodes.BLACK_BACKGROUND + "TOTAL: " + ColorCodes.YELLOW + "$%.2f" + ColorCodes.RESET + "\n", totalAmount);
+        }
     }
 
     // Lists all entries for specified vendor
@@ -661,7 +705,7 @@ public class LedgerApp
         }
         else
         {
-            System.out.println("\n" + ColorCodes.BLACK_BACKGROUND + "NO ENTRIES FOUND FOR '" + vendor + "'" + ColorCodes.RESET);
+            System.out.println("\n" + ColorCodes.BLACK_BACKGROUND + ColorCodes.RED + "NO ENTRIES FOUND FOR '" + vendor + "'" + ColorCodes.RESET);
         }
     }
 
@@ -747,7 +791,7 @@ public class LedgerApp
             {
                 try
                 {
-                    System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter amount (use '-' for payments):" + ColorCodes.RESET + " $");
+                    System.out.print(ColorCodes.BLACK_BACKGROUND + "Enter amount:" + ColorCodes.RESET + " $");
                     String sAmount = scanner.nextLine().toUpperCase().strip();
                     if (sAmount.equalsIgnoreCase("X"))
                     {
@@ -818,15 +862,15 @@ public class LedgerApp
         // Print how many matches found (if any)
         if(numMatches > 1)
         {
-            System.out.println("\nFOUND " + numMatches + " MATCHES!");
+            System.out.println("\n" + ColorCodes.BLACK_BACKGROUND + "FOUND " + numMatches + " MATCHES!" + ColorCodes.RESET);
         }
         else if(numMatches == 1)
         {
-            System.out.println("\nFOUND " + numMatches + " MATCH!");
+            System.out.println("\n" + ColorCodes.BLACK_BACKGROUND + "FOUND " + numMatches + " MATCH!" + ColorCodes.RESET);
         }
         else
         {
-            System.out.println("\nNO MATCHES FOUND.");
+            System.out.println("\n" + ColorCodes.BLACK_BACKGROUND + ColorCodes.RED + "NO MATCHES FOUND." + ColorCodes.RESET);
         }
     }
 
