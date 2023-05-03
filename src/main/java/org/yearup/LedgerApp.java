@@ -26,6 +26,13 @@ public class LedgerApp
         return 0 - num;
     }
 
+    // Print formatted labels when displaying entries
+    public void printLabels()
+    {
+        System.out.println(ColorCodes.BLACK_BACKGROUND + "Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount" + ColorCodes.RESET);
+        System.out.println("--------------------------------------------------------------------------------------------------------");
+    }
+
     // Print a formatted entry for Transaction t
     public void printEntry(Transaction t)
     {
@@ -444,8 +451,9 @@ public class LedgerApp
         if(list == transactions) {System.out.println("\n----------SHOW-ALL----------\n");}
         else if(list == deposits) {System.out.println("\n----------DEPOSITS----------\n");}
         else if(list == payments) {System.out.println("\n----------PAYMENTS----------\n");}
-        System.out.println("Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
-        System.out.println("--------------------------------------------------------------------------------------------------------");
+
+        printLabels();
+
         for(Transaction t : list)
         {
             printEntry(t);
@@ -477,8 +485,7 @@ public class LedgerApp
         System.out.println("\n----------MONTH-TO-DATE----------\n");
         System.out.println("CURRENT DATE: " + currentDate.getMonth() + " " + currentDate.getDayOfMonth() + ", " + currentDate.getYear() + "\n");
 
-        System.out.println("Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
-        System.out.println("--------------------------------------------------------------------------------------------------------");
+        printLabels();
 
         for(Transaction t : transactions)
         {
@@ -520,8 +527,7 @@ public class LedgerApp
         System.out.println("CURRENT DATE: " + currentDate.getMonth() + " " + currentDate.getDayOfMonth() + ", " + currentDate.getYear() + "\n");
         System.out.println("PREVIOUS MONTH: " + firstDayOfPreviousMonth.getMonth() + "\n");
 
-        System.out.println("Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
-        System.out.println("--------------------------------------------------------------------------------------------------------");
+        printLabels();
 
         for(Transaction t : transactions)
         {
@@ -562,8 +568,7 @@ public class LedgerApp
         System.out.println("CURRENT DATE: " + currentDate.getMonth() + " " + currentDate.getDayOfMonth() + ", " + currentDate.getYear() + "\n");
         System.out.println("YEAR OF: " + currentDate.getYear() + "\n");
 
-        System.out.println("Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
-        System.out.println("--------------------------------------------------------------------------------------------------------");
+        printLabels();
 
         for(Transaction t : transactions)
         {
@@ -605,8 +610,7 @@ public class LedgerApp
         System.out.println("CURRENT DATE: " + currentDate.getMonth() + " " + currentDate.getDayOfMonth() + ", " + currentDate.getYear() + "\n");
         System.out.println("YEAR OF: " + firstDayOfPreviousYear.getYear() + "\n");
 
-        System.out.println("Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
-        System.out.println("--------------------------------------------------------------------------------------------------------");
+        printLabels();
 
         for(Transaction t : transactions)
         {
@@ -629,8 +633,7 @@ public class LedgerApp
         System.out.print("Enter vendor name (partial/full): ");
         String vendor = scanner.nextLine().toUpperCase();
 
-        System.out.println("\nDate\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
-        System.out.println("--------------------------------------------------------------------------------------------------------");
+        printLabels();
 
         // Count vendors found
         int entriesFound = 0;
@@ -753,8 +756,8 @@ public class LedgerApp
         }
 
         System.out.println("\n----------MATCHES----------\n");
-        System.out.println("Date\t\t\tTime\t\t\tDescription\t\t\t\t\t\t\t\t Vendor\t\t\t\t\t  Amount");
-        System.out.println("--------------------------------------------------------------------------------------------------------");
+
+        printLabels();
 
         // Go through all transactions & check if it matches each filter
         // Go through each filter one by one (of not skipped)
