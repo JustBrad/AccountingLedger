@@ -252,7 +252,7 @@ public class LedgerApp
             }
             else
             {
-                System.out.println("The amount cannot be zero.\n");
+                System.out.println("\nThe amount cannot be zero.\n");
             }
         }
 
@@ -316,7 +316,7 @@ public class LedgerApp
             }
             else
             {
-                System.out.println("The amount cannot be zero.\n");
+                System.out.println("\nThe amount cannot be zero.\n");
             }
         }
 
